@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-sm-3">
+                <label>Elige opcion de busqueda de tu jugador</label>
+            </div>
+            <div class="col-sm-1">
+                <select name="opcion" [(ngModel)]="opcion" class="form-control">
+                    <option value="Nombre" selected>Nombre</option>
+                    <option value="Posición">Posición</option>
+                    <option value="Edad">Edad</option>
+                  </select>
+            </div>
+            <div class="col-sm-2">
+                <input  type="text" class="form-control" placeholder="Jugador"  name="filterSearch"   [(ngModel)]="filterSearch" >
+            </div>
+          </div>
+    </div>
+</div>
+
+<section class="container" >
+    <div class="row">
+        <article *ngFor="let player of players | nameFilter:filterSearch:opcion" class="col-sm-6 col-md player-item" >
+                <img src="{{player.img}}" />
+                <h3>{{player.nombre}} </h3>
+                <p *ngIf="!!player.anillos">Anillos NBA: {{player.anillos}}</p>
+                <p *ngIf="!player.anillos">Anillos NBA: Ninguno</p>
+                <p>Posición: {{player.posicion}}</p>
+                <p>Edad: {{player.edad}}</p>
+                <button [routerLink]="['player', player.id]" class="btn btn-primary">Ver detalle</button> 
+        </article>
+    </div>
+</section>
